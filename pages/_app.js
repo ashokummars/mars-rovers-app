@@ -35,7 +35,7 @@ export default withRedux(makeStore, {debug: true})(
                         <MetaTags>
                             <title>Mars Rovers App</title>
                             <meta name="description" content="Mars Rovers App" />
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                            <meta name="viewport" content="width=device-width, initial-scale=1"/>
                         </MetaTags>
                         <div className="nasa-rover">
                             <Layout>
