@@ -17,12 +17,14 @@ class Rover extends React.Component {
 			rover: '',
 			roverName: '',
 			camera: '',
-			martianSol: ''
+			martianSol: '',
+			martianSolRequired: false
 		}
 
 		this.onRoverChange = this.onRoverChange.bind( this );
 		this.onCameraChange = this.onCameraChange.bind( this );
 		this.onMartianSolChange = this.onMartianSolChange.bind( this );
+		this.onClick = this.onClick.bind( this );
 
 		this.props.loading();
 		this.props.getRoversAsync();
@@ -60,7 +62,7 @@ class Rover extends React.Component {
 				<div className="nasa-imagery-search">
 
 					
-					<div>
+					<form>
 						<div className="row">
 							<span>Select Rover</span>
 							<span>
@@ -96,10 +98,22 @@ class Rover extends React.Component {
 								</div>
 
 								<div className="row">
-									<span>Enter Martial Sol</span>
-									<span>
-										<input type="text" onChange={ this.onMartianSolChange }/>
-									</span>
+									<div>
+										<span>Enter Martial Sol *</span>
+										<span>
+											<input type="number" id="martian-sol" name="martian-sol" onChange={ this.onMartianSolChange } className={ (this.state.martianSolRequired ? "error" : '')}/>
+										
+										</span>
+									</div>
+									<div>
+										<span></span>
+										<span>
+											{ this.state.martianSolRequired ? 
+												<span className="error"> This field is required</span> : 
+												''
+											}
+										</span>
+									</div>
 								</div>
 
 
@@ -107,16 +121,16 @@ class Rover extends React.Component {
 									<span>
 										<Link href={"/images/[rover]?status=" + selectedRover.status + "&camera=" + this.state.camera + "&martianSol=" + this.state.martianSol + "&page=1" } as={`/images/${ this.state.roverName }?status=${ selectedRover.status }&camera=${ this.state.camera }&martianSol=${ this.state.martianSol }&page=1`}>
 										{/*<Link href={{ pathname: `/images/${ this.state.roverName }`, query: { status: `${ selectedRover.status }`, camera: `${ this.state.camera }`, martianSol: `${ this.state.martianSol }` }}}>*/}
-											<a className="button">Submit</a>
+											<a className="button" onClick={ this.onClick }>Submit</a>
 										</Link>
 									</span>
 								</div>
 							</>
 
 							: '' }
-						</div>
+						</form>
 					
-					{ this.state.rover && this.state.rover.length > 0 ? <RoverDetails name={ selectedRover.name } launch_date={ selectedRover.launch_date } landing_date={ selectedRover.landing_date } status={ selectedRover.status } total_photos={ selectedRover.total_photos }/> : '' }
+					{ this.state.rover && this.state.rover.length > 0 ? <RoverDetails name={ selectedRover.name } launch_date={ selectedRover.launch_date } landing_date={ selectedRover.landing_date } status={ selectedRover.status } total_photos={ selectedRover.total_photos } total_cameras={ selectedRover.cameras.length }/> : '' }
 
 				</div>
 				<style jsx>{`
@@ -150,6 +164,19 @@ class Rover extends React.Component {
 					    margin: 2em 0;
 					    text-decoration: none
 					}
+
+					input.error{
+						border: 1px solid red;
+					}
+
+					span.error{
+						display: block;
+						color: red;
+					}
+
+					input, select{
+						height: 30px;
+					}
 					
 				`}
 				</style>
@@ -182,6 +209,21 @@ class Rover extends React.Component {
 			martianSol: event.target.value
 		})
 	} 
+
+	onClick( event ){
+		var value = document.getElementById('martian-sol').value;
+		let martianSolRequired = false;
+		if( value == null || value.length === 0 ){
+			event.preventDefault();
+			event.stopPropagation();
+			martianSolRequired = true;
+		}
+
+		this.setState({
+			martianSolRequired: martianSolRequired
+		})
+		return false;
+	}
 }
 
 const mapStateToProps = state => {
