@@ -2,6 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import App, {Container} from 'next/app';
 import withRedux from 'next-redux-wrapper';
+import MetaTags from 'react-meta-tags';
 import { makeStore } from '../store';
 import Layout from '../components/layout';
 
@@ -31,6 +32,11 @@ export default withRedux(makeStore, {debug: true})(
             return (
                 <Container>
                     <Provider store={store}>
+                        <MetaTags>
+                            <title>Mars Rovers App</title>
+                            <meta name="description" content="Mars Rovers App" />
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                        </MetaTags>
                         <div className="nasa-rover">
                             <Layout>
                                 <Component {...pageProps} />
