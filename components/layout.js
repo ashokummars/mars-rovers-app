@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from './header';
 
 const styles = {
 	margin: "40px 10px"
