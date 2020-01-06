@@ -65,7 +65,7 @@ class Images extends React.Component{
 		return(
 			<div className="nasa-imagery-search-app">
 				
-				<RoverDetails name={ this.props.router.query.rover }/>
+				<RoverDetails name={ this.props.router.query.rover } total_pictures={ photos.length }/>
 
 				<div className="gallery">
 					{

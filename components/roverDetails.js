@@ -49,6 +49,14 @@ const RoverDetails = ( props ) => (
 			: ''
 		}
 
+		{ props.total_pictures ? 
+			<div>
+				<span>Total Pictures</span>
+				<span>{ props.total_pictures }</span>
+			</div>
+			: ''
+		}
+
 		<style jsx>{`
 			div span{
 				padding: 5px 0;
