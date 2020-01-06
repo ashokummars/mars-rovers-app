@@ -59,8 +59,9 @@ class Pagination extends React.Component {
 					}
 
 					div.pagination{
-						display: flex;
+						display: table;
 						padding: 10px 0;
+						margin: auto;
 					}
 
 					a.page{
@@ -81,6 +82,10 @@ class Pagination extends React.Component {
 
 					div.pages a:last-child{
 						border-right: unset;
+					}
+
+					div.prev, div.next{
+						margin: 0 5px;
 					}
 				`}</style>
 				
@@ -139,7 +144,6 @@ class Pagination extends React.Component {
 			start: currentPage - pagesToDisplay
 		}
 
-		console.log(pageObj);
 		return pageObj;
 
 	}
