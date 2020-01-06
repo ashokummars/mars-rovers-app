@@ -72,10 +72,22 @@ class Images extends React.Component{
 						batchRecords.map( ( photo, index ) => (
 							
 							<div className="gallery-div" key={ photo.id }>
-								<picture>
-									<source srcSet={ photo.img_src.replace("http://", "https://") } className="gallery-img"/>
-									<img src={ photo.img_src.replace("http://", "https://") } key={ photo.id } className="gallery-img"/>
-								</picture>
+								<div>
+									<picture>
+										<source srcSet={ photo.img_src.replace("http://", "https://") } className="gallery-img"/>
+										<img src={ photo.img_src.replace("http://", "https://") } key={ photo.id } className="gallery-img"/>
+									</picture>
+								</div>
+								<div className="gallery-image-details">
+									<div>
+										<span>Camera</span>
+										<span>{ photo.camera.full_name }</span>
+									</div>
+									<div>
+										<span>Earth Date</span>
+										<span>{ photo.earth_date}</span>
+									</div>
+								</div>
 							</div>
 							
 						))
@@ -126,6 +138,20 @@ class Images extends React.Component{
 						div.gallery{
 							grid-template-columns: repeat(1, 1fr);
 					    }
+					}
+
+					div.gallery-image-details div span:first-child{
+						font-weight: bold;
+					}
+					div.gallery-image-details div span{
+						margin: 5px 0;
+						display: inline-block;
+						width: 50%;
+					}
+
+					div.gallery-div{
+						border: 1px solid gray;
+    					padding: 5px;
 					}
 				`}
 				</style>
